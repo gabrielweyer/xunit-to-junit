@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+  <testsuite name="Contoso.Hello.HelloTests.dll" tests="1">
+    <testcase name="WhenDoWork_ThenSomeSweetJson" classname="Contoso.Hello.HelloTests.EvenMoreUselessTests" />
+  </testsuite>
+</testsuites>
