@@ -63,22 +63,15 @@ Task("Test")
     .IsDependentOn("Build")
     .Does(() =>
     {
-        var settings = new DotNetCoreToolSettings();
-
-        var argumentsBuilder = new ProcessArgumentBuilder()
-            .Append("-configuration")
-            .Append(configuration)
-            .Append("-nobuild");
-
-        var projectFiles = GetFiles("./tests/*/*Tests.csproj");
-
-        foreach (var projectFile in projectFiles)
+        var settings = new DotNetCoreTestSettings
         {
-            var testResultsFile = testsResultsDir.Combine($"{projectFile.GetFilenameWithoutExtension()}.xml");
-            var arguments = $"{argumentsBuilder.Render()} -xml \"{testResultsFile}\"";
+            Configuration = configuration,
+            NoBuild = true
+        };
 
-            DotNetCoreTool(projectFile, "xunit", arguments, settings);
-        }
+        GetFiles("./tests/*/*Tests.csproj")
+            .ToList()
+            .ForEach(f => DotNetCoreTest(f.FullPath, settings));
     });
 
 Task("PublishAppVeyorArtifacts")
