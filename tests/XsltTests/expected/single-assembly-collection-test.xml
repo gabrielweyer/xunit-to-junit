@@ -1,4 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<testsuite name="Contoso.Hello.HelloTests.dll" tests="1">
-  <testcase name="WhenDoWork_ThenSomeSweetJson" classname="Contoso.Hello.HelloTests.EvenMoreUselessTests" />
-</testsuite>
+<testsuites>
+  <testsuite name="Contoso.Hello.HelloTests.dll" tests="1" failures="0" disabled="0" errors="0" time="0.181" timestamp="2017-12-31T14:59:12">
+    <testcase name="WhenDoWork_ThenSomeSweetJson" classname="Contoso.Hello.HelloTests.EvenMoreUselessTests" time="0.0707464" />
+  </testsuite>
+</testsuites>
