@@ -1,9 +1,12 @@
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
-var version = "1.0.0";
+var assemblyVersion = "1.0.0";
+var packageVersion = "1.0.0";
 
-var testsResultsDir = MakeAbsolute(Directory("tests-results"));
+var artifactsDir = MakeAbsolute(Directory("artifacts"));
+var testsResultsDir = artifactsDir.Combine(Directory("tests-results"));
+var packagesDir = artifactsDir.Combine(Directory("packages"));
 
 var solutionPath = "./xUnitToJUnit.sln";
 
@@ -32,9 +35,12 @@ Task("SemVer")
     .Does(() =>
     {
         var gitVersion = GitVersion();
-        version = gitVersion.NuGetVersion;
 
-        Information($"Version: {version}");
+        assemblyVersion = gitVersion.AssemblySemVer;
+        packageVersion = gitVersion.NuGetVersion;
+
+        Information($"AssemblySemVer: {assemblyVersion}");
+        Information($"NuGetVersion: {packageVersion}");
     });
 
 Task("SetAppVeyorVersion")
@@ -42,7 +48,7 @@ Task("SetAppVeyorVersion")
     .WithCriteria(() => AppVeyor.IsRunningOnAppVeyor)
     .Does(() =>
     {
-        AppVeyor.UpdateBuildVersion(version);
+        AppVeyor.UpdateBuildVersion(packageVersion);
     });
 
 Task("Build")
@@ -53,6 +59,11 @@ Task("Build")
         {
             Configuration = configuration,
             NoIncremental = true,
+            MSBuildSettings = new DotNetCoreMSBuildSettings()
+                .SetVersion(assemblyVersion)
+                .WithProperty("FileVersion", packageVersion)
+                .WithProperty("InformationalVersion", packageVersion)
+                .WithProperty("nowarn", "7035"),
             ArgumentCustomization = args => args.Append("--no-restore")
         };
 
@@ -74,8 +85,31 @@ Task("Test")
             .ForEach(f => DotNetCoreTest(f.FullPath, settings));
     });
 
-Task("PublishAppVeyorArtifacts")
+
+Task("Pack")
     .IsDependentOn("Test")
+    .WithCriteria(() => HasArgument("pack"))
+    .Does(() =>
+    {
+        var settings = new DotNetCorePackSettings
+        {
+            Configuration = configuration,
+            NoBuild = true,
+            IncludeSymbols = true,
+            OutputDirectory = packagesDir,
+            ArgumentCustomization = args => args
+                .Append("--no-restore"),
+            MSBuildSettings = new DotNetCoreMSBuildSettings()
+                .WithProperty("PackageVersion", packageVersion)
+        };
+
+        GetFiles("./src/*/*.csproj")
+            .ToList()
+            .ForEach(f => DotNetCorePack(f.FullPath, settings));
+    });
+
+Task("PublishAppVeyorArtifacts")
+    .IsDependentOn("Pack")
     .WithCriteria(() => AppVeyor.IsRunningOnAppVeyor)
     .Does(() =>
     {
@@ -84,6 +118,12 @@ Task("PublishAppVeyorArtifacts")
         GetFiles($"./*.xslt")
             .ToList()
             .ForEach(f => AppVeyor.UploadArtifact(f, new AppVeyorUploadArtifactsSettings { DeploymentName = "transform" }));
+
+        CopyFiles($"{packagesDir}/*.nupkg", MakeAbsolute(Directory("./")), false);
+
+        GetFiles($"./*.nupkg")
+            .ToList()
+            .ForEach(f => AppVeyor.UploadArtifact(f, new AppVeyorUploadArtifactsSettings { DeploymentName = "packages" }));
     });
 
 Task("Default")
