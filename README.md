@@ -4,9 +4,18 @@
 
 **Note**: this only handles the easiest use case for the moment, as soon as I encounter issues in real life usage I'll add extra testing scenarios.
 
-## Use from C# ##
+## Consume the transform ##
+
+### Consume `JUnit.xslt` through the `xUnitToJUnit.CommandLine` `NuGet` package ###
+
+```posh
+dotnet ./xunit-to-junit.dll "path-to-xunit-test-results.xml" "desired-path-to-junit-test-results.xml"
+```
+
+### Consume `JUnit.xslt` directly from C# ###
 
 ```csharp
+// Required using statement
 using System.Xml.Xsl;
 
 // Change the value of these three variables
