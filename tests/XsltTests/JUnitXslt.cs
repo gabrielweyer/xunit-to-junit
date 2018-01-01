@@ -19,7 +19,7 @@ namespace XsltTests
             {
                 OmitXmlDeclaration = false,
                 Indent = true,
-                Encoding = Encoding.UTF8,
+                Encoding = new UTF8Encoding(false)
             };
         }
 
@@ -36,8 +36,7 @@ namespace XsltTests
             {
                 XslTransform.Transform($"./input/{inputFileName}.xml", results);
                 return Encoding.UTF8
-                    .GetString(stream.ToArray())
-                    .TrimStart('\ufeff');
+                    .GetString(stream.ToArray());
             }
         }
     }

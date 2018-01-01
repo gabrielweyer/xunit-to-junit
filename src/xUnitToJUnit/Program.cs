@@ -42,7 +42,7 @@ namespace xUnitToJUnit
             {
                 OmitXmlDeclaration = false,
                 Indent = true,
-                Encoding = Encoding.UTF8,
+                Encoding = new UTF8Encoding(false)
             };
 
             using (var stream = new FileStream(JUnitTestResultsFilePath, FileMode.Create, FileAccess.Write))
