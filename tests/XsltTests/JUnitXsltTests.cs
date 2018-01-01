@@ -9,11 +9,63 @@ namespace XsltTests
     public class JUnitXsltTests
     {
         [Fact]
-        public void GivenSingleAssemblyCollectionTest_WhenTransform_ThenExpectedJUnitFile()
+        public void GivenValidInput_WhenTransform_ThenSaveWithoutBom()
         {
             // Arrange
 
-            const string inputFileName = "single-assembly-collection-test";
+            const string inputFileName = "passed-test";
+
+            // Act
+
+            var actual = JUnitXslt.Transform(inputFileName);
+
+            // Assert
+            
+            Assert.Equal('<', actual[0]);
+        }
+        
+        [Fact]
+        public void GivenPassedTest_WhenTransform_ThenGeneratePassedMarkup()
+        {
+            // Arrange
+
+            const string inputFileName = "passed-test";
+
+            // Act
+
+            var actual = JUnitXslt.Transform(inputFileName);
+
+            // Assert
+
+            var expected = GetExpected(inputFileName);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void GivenSkippedTest_WhenTransform_ThenGenerateSkippedMarkup()
+        {
+            // Arrange
+
+            const string inputFileName = "skipped-test";
+
+            // Act
+
+            var actual = JUnitXslt.Transform(inputFileName);
+
+            // Assert
+
+            var expected = GetExpected(inputFileName);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void GivenFailedTest_WhenTransform_ThenGenerateFaileddMarkup()
+        {
+            // Arrange
+
+            const string inputFileName = "failed-test";
 
             // Act
 

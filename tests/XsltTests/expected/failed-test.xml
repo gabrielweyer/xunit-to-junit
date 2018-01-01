@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+  <testsuite name="Contoso.Hello.HelloTests.dll" tests="1" failures="1" skipped="0" errors="0" time="0.212" timestamp="2018-01-01T17:26:00">
+    <testcase name="WhenDoWork_ThenSomeSweetJson" classname="Contoso.Hello.HelloTests.EvenMoreUselessTests" time="0.0745211">
+      <failure type="Xunit.Sdk.EqualException" message="Assert.Equal() Failure\r\n                ↓ (pos 6)\r\nExpected: Some JON (maybe): \&quot;Hello\&quot;\r\nActual:   Some JSON (maybe): \&quot;Hello\&quot;\r\n                ↑ (pos 6)"><![CDATA[   at Contoso.Hello.HelloTests.EvenMoreUselessTests.WhenDoWork_ThenSomeSweetJson() in C:\Code\Me\build\tests\HelloTests\EvenMoreUselessTests.cs:line 19]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>
