@@ -2,7 +2,6 @@
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output method="xml" indent="yes" omit-xml-declaration="no" cdata-section-elements="message stack-trace"/>
   <xsl:template match="/">
-    <testsuites>
       <xsl:for-each select="//assembly">
         <testsuite>
           <xsl:attribute name="name"><xsl:value-of select="@name"/></xsl:attribute>
@@ -15,6 +14,5 @@
           </xsl:for-each>
         </testsuite>
       </xsl:for-each>
-    </testsuites>
   </xsl:template>
 </xsl:stylesheet>
