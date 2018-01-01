@@ -36,7 +36,7 @@ namespace xUnitToJUnit
             }
             
             var xlsTransform = new XslCompiledTransform();
-            xlsTransform.Load($"{AppContext.BaseDirectory}/Junit.xslt");
+            xlsTransform.Load($"{AppContext.BaseDirectory}/JUnit.xslt");
 
             var writerSettings = new XmlWriterSettings
             {
