@@ -11,14 +11,17 @@
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="../../src/JUnit.xslt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="input/*.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="expected/*.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\xUnitToJUnit\xUnitToJUnit.csproj">
+      <Project>{108F0E90-5660-4F79-9F55-1ABA43F787F8}</Project>
+      <Name>xUnitToJUnit</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

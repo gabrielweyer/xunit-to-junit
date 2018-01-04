@@ -14,6 +14,8 @@ dotnet ./xunit-to-junit.dll "path-to-xunit-test-results.xml" "desired-path-to-ju
 
 ### Consume `JUnit.xslt` directly from C# ###
 
+**Note**: For `.NET Core`, this requires `nestandard2.0` and above.
+
 ```csharp
 // Required using statement
 using System.Xml.Xsl;
@@ -26,12 +28,9 @@ const string xsltFilePath = "C:/tmp/JUnit.xslt";
 var xlsTransform = new XslCompiledTransform();
 xlsTransform.Load(xsltFilePath);
 
-var writerSettings = new XmlWriterSettings
-{
-    OmitXmlDeclaration = false,
-    Indent = true,
-    Encoding = Encoding.UTF8,
-};
+writerSettings = xlsTransform.OutputSettings.Clone();
+// Save without BOM, CircleCI can't read test results files starting with a BOM
+writerSettings.Encoding = new UTF8Encoding(false);
 
 using (var stream = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write))
 using (var results = XmlWriter.Create(stream, writerSettings))

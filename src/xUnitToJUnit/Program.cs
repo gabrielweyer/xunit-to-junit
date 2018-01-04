@@ -1,8 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Text;
-using System.Xml;
-using System.Xml.Xsl;
 
 namespace xUnitToJUnit
 {
@@ -19,40 +15,12 @@ namespace xUnitToJUnit
             }
 
             var xUnitTestResultsFilePath = args[0];
-            var JUnitTestResultsFilePath = args[1];
-
-            if (!File.Exists(xUnitTestResultsFilePath))
-            {
-                Console.WriteLine(
-                    $"The xUnit test results file path provided \"{xUnitTestResultsFilePath}\" does not exist.");
-                return;
-            }
-
-            var JUnitTestResultsDirectory = Path.GetDirectoryName(JUnitTestResultsFilePath);
-
-            if (!Directory.Exists(JUnitTestResultsDirectory))
-            {
-                Directory.CreateDirectory(JUnitTestResultsDirectory);
-            }
+            var jUnitTestResultsFilePath = args[1];
             
-            var xlsTransform = new XslCompiledTransform();
-            xlsTransform.Load($"{AppContext.BaseDirectory}/JUnit.xslt");
-
-            var writerSettings = new XmlWriterSettings
-            {
-                OmitXmlDeclaration = false,
-                Indent = true,
-                Encoding = new UTF8Encoding(false)
-            };
-
-            using (var stream = new FileStream(JUnitTestResultsFilePath, FileMode.Create, FileAccess.Write))
-            using (var results = XmlWriter.Create(stream, writerSettings))
-            {
-                xlsTransform.Transform(xUnitTestResultsFilePath, results);
-            }
+            JUnitTransformer.Transform(xUnitTestResultsFilePath, jUnitTestResultsFilePath);
 
             Console.WriteLine(
-                $"The xUnit test results file \"{xUnitTestResultsFilePath}\" has been converted to the JUnit test results file \"{JUnitTestResultsFilePath}\"");
+                $"The xUnit test results file \"{xUnitTestResultsFilePath}\" has been converted to the JUnit test results file \"{jUnitTestResultsFilePath}\"");
         }
     }
 }
