@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<assemblies timestamp="01/01/2018 17:26:00">
+  <assembly name="Contoso.Hello.HelloTests.dll" environment="64-bit .NET Standard [collection-per-class, parallel (4 threads)]" test-framework="xUnit.net 2.3.1.3858" run-date="2018-01-01" run-time="17:26:00" total="1" passed="0" failed="1" skipped="0" time="0.212" errors="0">
+    <errors />
+    <collection total="1" passed="0" failed="1" skipped="0" name="Test collection for Contoso.Hello.HelloTests.EvenMoreUselessTests" time="0.075">
+      <test name="Contoso.Hello.HelloTests.EvenMoreUselessTests.WhenDoWork_ThenSomeSweetJson" type="Contoso.Hello.HelloTests.EvenMoreUselessTests" method="WhenDoWork_ThenSomeSweetJson" time="0.0745211" result="Fail">
+        <failure exception-type="Xunit.Sdk.EqualException">
+          <message><![CDATA[Assert.Equal() Failure\r\n                ↓ (pos 6)\r\nExpected: Some JON (maybe): \"Hello\"\r\nActual:   Some JSON (maybe): \"Hello\"\r\n                ↑ (pos 6)]]></message>
+          <stack-trace><![CDATA[   at Contoso.Hello.HelloTests.EvenMoreUselessTests.WhenDoWork_ThenSomeSweetJson() in C:\Code\Me\build\tests\HelloTests\EvenMoreUselessTests.cs:line 19]]></stack-trace>
+        </failure>
+      </test>
+    </collection>
+  </assembly>
+</assemblies>
