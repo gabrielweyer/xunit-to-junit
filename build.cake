@@ -59,12 +59,12 @@ Task("Build")
         {
             Configuration = configuration,
             NoIncremental = true,
+            NoRestore = true,
             MSBuildSettings = new DotNetCoreMSBuildSettings()
                 .SetVersion(assemblyVersion)
                 .WithProperty("FileVersion", packageVersion)
                 .WithProperty("InformationalVersion", packageVersion)
-                .WithProperty("nowarn", "7035"),
-            ArgumentCustomization = args => args.Append("--no-restore")
+                .WithProperty("nowarn", "7035")
         };
 
         DotNetCoreBuild(solutionPath, settings);
@@ -95,10 +95,9 @@ Task("Pack")
         {
             Configuration = configuration,
             NoBuild = true,
+            NoRestore = true,
             IncludeSymbols = true,
             OutputDirectory = packagesDir,
-            ArgumentCustomization = args => args
-                .Append("--no-restore"),
             MSBuildSettings = new DotNetCoreMSBuildSettings()
                 .WithProperty("PackageVersion", packageVersion)
         };
