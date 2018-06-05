@@ -10,9 +10,9 @@
         <copyright>Copyright © xUnitToJUnit contributors</copyright>
     </metadata>
     <files>
-        <file src="bin\Release\netcoreapp2.0\*.dll" target="tools" />
-        <file src="bin\Release\netcoreapp2.0\*.runtimeconfig.json" target="tools" />
-        <file src="bin\Release\netcoreapp2.0\*.pdb" target="tools" />
-        <file src="bin\Release\netcoreapp2.0\*.xslt" target="tools" />
+        <file src="bin\Release\netcoreapp2.1\*.dll" target="tools" />
+        <file src="bin\Release\netcoreapp2.1\*.runtimeconfig.json" target="tools" />
+        <file src="bin\Release\netcoreapp2.1\*.pdb" target="tools" />
+        <file src="bin\Release\netcoreapp2.1\*.xslt" target="tools" />
     </files>
 </package>
