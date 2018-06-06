@@ -3,18 +3,18 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <RuntimeFrameworkVersion>2.1.0</RuntimeFrameworkVersion>
-    <AssemblyName>xunit-to-junit</AssemblyName>
-    <NuspecFile>xUnitToJUnit.nuspec</NuspecFile>
+    <AssemblyName>dotnet-xunit-to-junit</AssemblyName>
+    <PackAsTool>true</PackAsTool>
+    <PackageId>dotnet-xunit-to-junit</PackageId>
+    <Authors>Gabriel Weyer</Authors>
+    <PackageDescription>Transforms a xUnit.net v2 XML test results file into a JUnit test results file.</PackageDescription>
+    <PackageTags>xUnit JUnit CircleCI</PackageTags>
+    <PackageProjectUrl>https://github.com/gabrielweyer/xunit-to-junit</PackageProjectUrl>
+    <Copyright>Copyright © xUnitToJUnit contributors</Copyright>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="../JUnit.xslt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <Target Name="SetNuspecProperties" BeforeTargets="GenerateNuspec">
-    <PropertyGroup>
-      <NuspecProperties>$(NuspecProperties);version=$(PackageVersion)</NuspecProperties>
-    </PropertyGroup>
-    <Message Importance="high" Text="NuspecProperties: $(NuspecProperties)" />
-  </Target>
 </Project>
