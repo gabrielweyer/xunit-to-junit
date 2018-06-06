@@ -2,7 +2,7 @@
 
 | Package | Release | Pre-release |
 | --- | --- | --- |
-| `xUnitToJUnit.CommandLine` | [![NuGet][nuget-command-badge]][nuget-command] | [![MyGet][myget-command-badge]][myget-command] |
+| `dotnet-xunit-to-junit` | [![NuGet][nuget-tool-badge]][nuget-command] | [![MyGet][myget-tool-badge]][myget-command] |
 
 | CI | Status | Platform(s) | Framework(s) | Test Framework(s) |
 | --- | --- | --- | --- | --- |
@@ -14,10 +14,13 @@
 
 ## Consume the transform ##
 
-### Consume `JUnit.xslt` through the `xUnitToJUnit.CommandLine` `NuGet` package ###
+### Consume `JUnit.xslt` through the `dotnet-xunit-to-junit` `NuGet` package ###
+
+`dotnet-xunit-to-junit` is a `.NET Core` [global tool][dotnet-global-tools]:
 
 ```posh
-dotnet ./xunit-to-junit.dll "path-to-xunit-test-results.xml" "desired-path-to-junit-test-results.xml"
+dotnet tool install -g dotnet-xunit-to-junit
+dotnet xunit-to-junit "path-to-xunit-test-results.xml" "desired-path-to-junit-test-results.xml"
 ```
 
 ### Consume `JUnit.xslt` directly from C# ###
@@ -49,9 +52,10 @@ using (var results = XmlWriter.Create(stream, writerSettings))
 
 [circle-ci]: https://circleci.com/
 [junit-format]: http://llg.cubic.org/docs/junit/
-[nuget-command-badge]: https://img.shields.io/nuget/v/xUnitToJUnit.CommandLine.svg?label=NuGet
-[nuget-command]: https://www.nuget.org/packages/xUnitToJUnit.CommandLine
-[myget-command-badge]: https://img.shields.io/myget/gabrielweyer-pre-release/v/xUnitToJUnit.CommandLine.svg?label=MyGet
-[myget-command]: https://www.myget.org/feed/gabrielweyer-pre-release/package/nuget/xUnitToJUnit.CommandLine
+[nuget-tool-badge]: https://img.shields.io/nuget/v/dotnet-xunit-to-junit.svg?label=NuGet
+[nuget-tool]: https://www.nuget.org/packages/dotnet-xunit-to-junit
+[myget-tool-badge]: https://img.shields.io/myget/gabrielweyer-pre-release/v/dotnet-xunit-to-junit.svg?label=MyGet
+[myget-tool]: https://www.myget.org/feed/gabrielweyer-pre-release/package/nuget/dotnet-xunit-to-junit
 [app-veyor]: https://ci.appveyor.com/project/GabrielWeyer/xunit-to-junit
 [app-veyor-shield]: https://ci.appveyor.com/api/projects/status/github/gabrielweyer/xunit-to-junit?branch=master&svg=true
+[dotnet-global-tools]: https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools

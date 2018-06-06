@@ -10,13 +10,13 @@ namespace xUnitToJUnit
             {
                 Console.WriteLine("Two arguments should be provided:");
                 Console.WriteLine(
-                    "dotnet ./xunit-to-junit.dll \"path-to-xunit-test-results.xml\" \"desired-path-to-junit-test-results.xml\"");
+                    "dotnet xunit-to-junit \"path-to-xunit-test-results.xml\" \"desired-path-to-junit-test-results.xml\"");
                 return;
             }
 
             var xUnitTestResultsFilePath = args[0];
             var jUnitTestResultsFilePath = args[1];
-            
+
             JUnitTransformer.Transform(xUnitTestResultsFilePath, jUnitTestResultsFilePath);
 
             Console.WriteLine(
