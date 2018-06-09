@@ -2,7 +2,7 @@
 
 | Package | Release | Pre-release |
 | --- | --- | --- |
-| `dotnet-xunit-to-junit` | [![NuGet][nuget-tool-badge]][nuget-command] | [![MyGet][myget-tool-badge]][myget-command] |
+| `dotnet-xunit-to-junit` | [![NuGet][nuget-tool-badge]][nuget-tool-command] | [![MyGet][myget-tool-badge]][myget-tool-command] |
 
 | CI | Status | Platform(s) | Framework(s) | Test Framework(s) |
 | --- | --- | --- | --- | --- |
@@ -53,9 +53,9 @@ using (var results = XmlWriter.Create(stream, writerSettings))
 [circle-ci]: https://circleci.com/
 [junit-format]: http://llg.cubic.org/docs/junit/
 [nuget-tool-badge]: https://img.shields.io/nuget/v/dotnet-xunit-to-junit.svg?label=NuGet
-[nuget-tool]: https://www.nuget.org/packages/dotnet-xunit-to-junit
+[nuget-tool-command]: https://www.nuget.org/packages/dotnet-xunit-to-junit
 [myget-tool-badge]: https://img.shields.io/myget/gabrielweyer-pre-release/v/dotnet-xunit-to-junit.svg?label=MyGet
-[myget-tool]: https://www.myget.org/feed/gabrielweyer-pre-release/package/nuget/dotnet-xunit-to-junit
+[myget-tool-command]: https://www.myget.org/feed/gabrielweyer-pre-release/package/nuget/dotnet-xunit-to-junit
 [app-veyor]: https://ci.appveyor.com/project/GabrielWeyer/xunit-to-junit
 [app-veyor-shield]: https://ci.appveyor.com/api/projects/status/github/gabrielweyer/xunit-to-junit?branch=master&svg=true
 [dotnet-global-tools]: https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools
