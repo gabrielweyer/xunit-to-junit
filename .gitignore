@@ -11,5 +11,4 @@ bin/
 # Cake
 
 tools/*
-!tools/packages.config
 artifacts/
