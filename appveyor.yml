@@ -4,8 +4,9 @@ init:
 branches:
   only:
     - master
-    # We'll also build whenever there is a new commit on any branch starting with `features/`
+    # We'll also build whenever there is a new commit on any branch starting with `features/` or `hotfix/`
     - /features\/.+/
+    - /hotfix\/.+/
 build_script:
   - ps: .\build.ps1 -pack
 assembly_info:

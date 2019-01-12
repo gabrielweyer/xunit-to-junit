@@ -1,5 +1,8 @@
 branches:
   feature:
     mode: ContinuousDeployment
+  hotfix:
+    mode: ContinuousDeployment
+    tag: useBranchName
 ignore:
   sha: []
