@@ -50,6 +50,24 @@ using (var results = XmlWriter.Create(stream, writerSettings))
 }
 ```
 
+## Running locally ##
+
+Install the [.NET Core SDK 2.2.102][dotnet-core-sdk].
+
+Once you're done, run this command to initialise `Cake`:
+
+```posh
+.\bootstrap.ps1
+```
+
+You can then run the build script:
+
+```posh
+dotnet cake build.cake
+```
+
+If you want to pack the `.NET Core Global Tool` you can run: `dotnet cake build.cake --pack`
+
 [circle-ci]: https://circleci.com/
 [junit-format]: http://llg.cubic.org/docs/junit/
 [nuget-tool-badge]: https://img.shields.io/nuget/v/dotnet-xunit-to-junit.svg?label=NuGet
@@ -59,3 +77,4 @@ using (var results = XmlWriter.Create(stream, writerSettings))
 [app-veyor]: https://ci.appveyor.com/project/GabrielWeyer/xunit-to-junit
 [app-veyor-shield]: https://ci.appveyor.com/api/projects/status/github/gabrielweyer/xunit-to-junit?branch=master&svg=true
 [dotnet-global-tools]: https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools
+[dotnet-core-sdk]: https://dotnet.microsoft.com/download
