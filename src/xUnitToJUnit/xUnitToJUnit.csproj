@@ -1,15 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFrameworks>netcoreapp2.1;netcoreapp2.2;netcoreapp3.0</TargetFrameworks>
     <AssemblyName>dotnet-xunit-to-junit</AssemblyName>
     <PackAsTool>true</PackAsTool>
     <PackageId>dotnet-xunit-to-junit</PackageId>
+    <VersionPrefix>1.0.2</VersionPrefix>
     <Authors>Gabriel Weyer</Authors>
     <PackageDescription>Transforms a xUnit.net v2 XML test results file into a JUnit test results file.</PackageDescription>
     <PackageTags>xUnit JUnit CircleCI</PackageTags>
     <PackageProjectUrl>https://github.com/gabrielweyer/xunit-to-junit</PackageProjectUrl>
     <Copyright>Copyright © xUnitToJUnit contributors</Copyright>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="../JUnit.xslt">
