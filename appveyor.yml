@@ -81,5 +81,5 @@ install:
   # `XsltTests` is targeting `netcoreapp2.1`, so we can safely install the latest `SDK`
   # The `SDK` is required to restore, build, publish... a `.NET Core` application
   # https://www.microsoft.com/net/download/windows
-  - ps: .\setup\dotnet-install.ps1 -Channel 3.0
+  - ps: .\setup\dotnet-install.ps1 -Channel 3.0 -Version 3.0.100-preview4-011223
   - ps: dotnet tool install --global Cake.Tool --version 0.31.0
