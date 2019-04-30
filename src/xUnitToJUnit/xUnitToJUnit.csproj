@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFrameworks>netcoreapp2.1;netcoreapp3.0</TargetFrameworks>
     <AssemblyName>dotnet-xunit-to-junit</AssemblyName>
     <PackAsTool>true</PackAsTool>
     <PackageId>dotnet-xunit-to-junit</PackageId>
