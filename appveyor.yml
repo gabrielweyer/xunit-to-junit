@@ -61,17 +61,6 @@ deploy:
     prerelease: true
     on:
       branch: /features\/.+/
-  - provider: NuGet
-    server: https://www.myget.org/F/gabrielweyer-pre-release/api/v2/package
-    api_key:
-      # Encrypted `MyGet` token - https://www.myget.org/profile/Me#!/AccessTokens
-      # https://www.appveyor.com/docs/deployment/nuget/#provider-settings
-      secure: Mw3OOYIQt9LVVJ+STxrwec8mEB+OSQX1ba3zccnm05MvvBiceV4C09N++rgplgtB
-    skip_symbols: false
-    symbol_server: https://www.myget.org/F/gabrielweyer-pre-release/symbols/api/v2/package
-    artifact: packages
-    on:
-      branch: /features\/.+/
 # Environment variables
 environment:
   # No need to pre-warm the `NuGet` cache

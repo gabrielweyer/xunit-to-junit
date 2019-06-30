@@ -1,8 +1,8 @@
 # xUnit.net v2 XML Format to JUnit Format #
 
-| Package | Release | Pre-release |
-| --- | --- | --- |
-| `dotnet-xunit-to-junit` | [![NuGet][nuget-tool-badge]][nuget-tool-command] | [![MyGet][myget-tool-badge]][myget-tool-command] |
+| Package | Release |
+| - | - |
+| `dotnet-xunit-to-junit` | [![NuGet][nuget-tool-badge]][nuget-tool-command] |
 
 | CI | Status | Platform(s) | Framework(s) | Test Framework(s) |
 | --- | --- | --- | --- | --- |
@@ -18,7 +18,7 @@
 
 `dotnet-xunit-to-junit` is a `.NET Core` [global tool][dotnet-global-tools]:
 
-```posh
+```powershell
 dotnet tool install -g dotnet-xunit-to-junit
 dotnet xunit-to-junit "path-to-xunit-test-results.xml" "desired-path-to-junit-test-results.xml"
 ```
@@ -56,13 +56,13 @@ Install the [.NET Core SDK 3.0.100-preview6-012264][dotnet-core-sdk].
 
 Once you're done, run this command to initialise `Cake`:
 
-```posh
+```powershell
 .\bootstrap.ps1
 ```
 
 You can then run the build script:
 
-```posh
+```powershell
 dotnet cake build.cake
 ```
 
@@ -72,8 +72,6 @@ If you want to pack the `.NET Core Global Tool` you can run: `dotnet cake build.
 [junit-format]: http://llg.cubic.org/docs/junit/
 [nuget-tool-badge]: https://img.shields.io/nuget/v/dotnet-xunit-to-junit.svg?label=NuGet
 [nuget-tool-command]: https://www.nuget.org/packages/dotnet-xunit-to-junit
-[myget-tool-badge]: https://img.shields.io/myget/gabrielweyer-pre-release/v/dotnet-xunit-to-junit.svg?label=MyGet
-[myget-tool-command]: https://www.myget.org/feed/gabrielweyer-pre-release/package/nuget/dotnet-xunit-to-junit
 [app-veyor]: https://ci.appveyor.com/project/GabrielWeyer/xunit-to-junit
 [app-veyor-shield]: https://ci.appveyor.com/api/projects/status/github/gabrielweyer/xunit-to-junit?branch=master&svg=true
 [dotnet-global-tools]: https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools
