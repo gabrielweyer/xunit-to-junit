@@ -52,7 +52,7 @@ using (var results = XmlWriter.Create(stream, writerSettings))
 
 ## Running locally ##
 
-Install the [.NET Core SDK 3.0.100-preview4-011223][dotnet-core-sdk].
+Install the [.NET Core SDK 3.0.100-preview6-012264][dotnet-core-sdk].
 
 Once you're done, run this command to initialise `Cake`:
 
