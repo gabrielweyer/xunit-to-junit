@@ -1,4 +1,4 @@
-image: Visual Studio 2017
+image: Visual Studio 2019
 init:
   - git config --global core.autocrlf true
 branches:
@@ -67,8 +67,8 @@ environment:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
 # `install` will run before `build_script`
 install:
-  # `XsltTests` is targeting `netcoreapp3.0`, so we need to install the Preview `SDK`
+  # `XsltTests` is targeting `netcoreapp3.1`, so we can safely install the latest `SDK`
   # The `SDK` is required to restore, build, publish... a `.NET Core` application
   # https://www.microsoft.com/net/download/windows
-  - ps: .\setup\dotnet-install.ps1 -Channel 3.0 -Version 3.0.100-preview6-012264
-  - ps: dotnet tool install --global Cake.Tool --version 0.33.0
+  - ps: .\setup\dotnet-install.ps1 -Channel Current
+  - ps: dotnet tool install --global Cake.Tool --version 0.35.0
