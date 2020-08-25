@@ -39,7 +39,7 @@ const string xsltFilePath = "C:/tmp/JUnit.xslt";
 var xlsTransform = new XslCompiledTransform();
 xlsTransform.Load(xsltFilePath);
 
-writerSettings = xlsTransform.OutputSettings.Clone();
+var writerSettings = xlsTransform.OutputSettings.Clone();
 // Save without BOM, CircleCI can't read test results files starting with a BOM
 writerSettings.Encoding = new UTF8Encoding(false);
 
