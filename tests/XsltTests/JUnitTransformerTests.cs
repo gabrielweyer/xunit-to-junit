@@ -111,7 +111,7 @@ namespace XsltTests
         }
 
         [Fact]
-        public void GivenFailedTest_WhenTransform_ThenGenerateFaileddMarkup()
+        public void GivenFailedTest_WhenTransform_ThenGenerateFailedMarkup()
         {
             // Arrange
 
