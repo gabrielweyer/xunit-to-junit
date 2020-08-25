@@ -75,6 +75,24 @@ namespace XsltTests
         }
 
         [Fact]
+        public void GivenInlineData_WhenTransform_ThenIncludeInlineDataInName()
+        {
+            // Arrange
+
+            const string inputFileName = "inline-data-test";
+
+            // Act
+
+            var actual = Transform(inputFileName);
+
+            // Assert
+
+            var expected = GetExpected(inputFileName);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
         public void GivenSkippedTest_WhenTransform_ThenGenerateSkippedMarkup()
         {
             // Arrange

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<assemblies timestamp="12/31/2017 14:59:12">
+  <assembly name="Contoso.Hello.HelloTests.dll" environment="64-bit .NET Standard [collection-per-class, parallel (4 threads)]" test-framework="xUnit.net 2.3.1.3858" run-date="2017-12-31" run-time="14:59:12" total="1" passed="1" failed="0" skipped="0" time="0.181" errors="0">
+    <errors />
+    <collection total="1" passed="1" failed="0" skipped="0" name="Test collection for Contoso.Hello.HelloTests.EvenMoreUselessTests" time="0.071">
+      <test name="UnitTestsProject.PolishCharacterMapperTests.Should_Map2Polish_returns_valid_mapped_string(input: \&quot;A\&quot;, output: \&quot;[AaĄą]\&quot;)" type="UnitTestsProject.PolishCharacterMapperTests" method="Should_Map2Polish_returns_valid_mapped_string" time="0.0000037" result="Pass" />
+      <test name="UnitTestsProject.PolishCharacterMapperTests.Should_Map2Polish_returns_valid_mapped_string(input: \&quot;ń\&quot;, output: \&quot;[Ńń]\&quot;)" type="UnitTestsProject.PolishCharacterMapperTests" method="Should_Map2Polish_returns_valid_mapped_string" time="0.0000042" result="Pass" />
+    </collection>
+  </assembly>
+</assemblies>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+  <testsuite name="Contoso.Hello.HelloTests.dll" tests="1" failures="0" skipped="0" errors="0" time="0.181" timestamp="2017-12-31T14:59:12">
+    <testcase name="Should_Map2Polish_returns_valid_mapped_string(input: \&quot;A\&quot;, output: \&quot;[AaĄą]\&quot;)" classname="UnitTestsProject.PolishCharacterMapperTests" time="0.0000037" />
+    <testcase name="Should_Map2Polish_returns_valid_mapped_string(input: \&quot;ń\&quot;, output: \&quot;[Ńń]\&quot;)" classname="UnitTestsProject.PolishCharacterMapperTests" time="0.0000042" />
+  </testsuite>
+</testsuites>
