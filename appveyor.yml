@@ -67,7 +67,7 @@ environment:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
 # `install` will run before `build_script`
 install:
-  # `XsltTests` is targeting `netcoreapp3.1`, so we can safely install the latest `SDK`
+  # `XsltTests` is targeting `net5.0`, so we can safely install the latest `SDK`
   # The `SDK` is required to restore, build, publish... a `.NET Core` application
   # https://www.microsoft.com/net/download/windows
   - ps: .\setup\dotnet-install.ps1 -Channel Current

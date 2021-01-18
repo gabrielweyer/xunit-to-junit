@@ -6,7 +6,7 @@
 
 | CI | Status | Platform(s) | Framework(s) | Test Framework(s) |
 | --- | --- | --- | --- | --- |
-| [AppVeyor][app-veyor] | [![Build Status][app-veyor-shield]][app-veyor] | `Windows` | `netcoreapp2.1`, `netcoreapp3.1` | `netcoreapp3.1` |
+| [AppVeyor][app-veyor] | [![Build Status][app-veyor-shield]][app-veyor] | `Windows` | `netcoreapp2.1`, `netcoreapp3.1`, `net5.0` | `net5.0` |
 
 [CircleCI][circle-ci] can only parse test results in the [JUnit format][junit-format]. This `Extensible Stylesheet Language Transformations` can transform a `xUnit.net v2 XML` test results file into a `JUnit` test results file.
 
@@ -52,7 +52,7 @@ using (var results = XmlWriter.Create(stream, writerSettings))
 
 ## Running locally ##
 
-Install the [.NET Core SDK 3.1.x][dotnet-core-sdk].
+Install the [.NET SDK 5.0.x][dotnet-core-sdk].
 
 Once you're done, run this command to initialise `Cake`:
 
@@ -75,4 +75,4 @@ If you want to pack the `.NET Core Global Tool` you can run: `dotnet cake build.
 [app-veyor]: https://ci.appveyor.com/project/GabrielWeyer/xunit-to-junit
 [app-veyor-shield]: https://ci.appveyor.com/api/projects/status/github/gabrielweyer/xunit-to-junit?branch=master&svg=true
 [dotnet-global-tools]: https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools
-[dotnet-core-sdk]: https://dotnet.microsoft.com/download/dotnet-core/3.1
+[dotnet-core-sdk]: https://dotnet.microsoft.com/download/dotnet/5.0
