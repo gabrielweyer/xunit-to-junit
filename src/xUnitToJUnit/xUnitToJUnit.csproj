@@ -10,6 +10,7 @@
     <PackageTags>xUnit JUnit CircleCI</PackageTags>
     <PackageProjectUrl>https://github.com/gabrielweyer/xunit-to-junit</PackageProjectUrl>
     <Copyright>Copyright © xUnitToJUnit contributors</Copyright>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="../JUnit.xslt">
