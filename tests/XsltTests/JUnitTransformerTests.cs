@@ -93,6 +93,24 @@ namespace XsltTests
         }
 
         [Fact]
+        public void GivenDisplayName_WhenTransform_ThenUseDisplayNameInsteadOfEmptyString()
+        {
+            // Arrange
+
+            const string inputFileName = "display-name-test";
+
+            // Act
+
+            var actual = Transform(inputFileName);
+
+            // Assert
+
+            var expected = GetExpected(inputFileName);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
         public void GivenSkippedTest_WhenTransform_ThenGenerateSkippedMarkup()
         {
             // Arrange

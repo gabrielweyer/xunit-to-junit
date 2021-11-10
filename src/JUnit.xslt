@@ -14,7 +14,14 @@
           <xsl:attribute name="timestamp"><xsl:value-of select="@run-date"/>T<xsl:value-of select="@run-time"/></xsl:attribute>
           <xsl:for-each select="collection/test">
                 <testcase>
-                  <xsl:attribute name="name"><xsl:value-of select="substring(substring-after(@name, @type), 2)"/></xsl:attribute>
+                  <xsl:choose>
+                    <xsl:when test="substring-after(@name, @type)=''">
+                      <xsl:attribute name="name"><xsl:value-of select="@name"/></xsl:attribute>
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <xsl:attribute name="name"><xsl:value-of select="substring(substring-after(@name, @type), 2)"/></xsl:attribute>
+                    </xsl:otherwise>
+                  </xsl:choose>
                   <xsl:attribute name="classname"><xsl:value-of select="@type"/></xsl:attribute>
                   <xsl:attribute name="time"><xsl:value-of select="@time"/></xsl:attribute>
                   <xsl:if test="@result='Skip'">
