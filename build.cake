@@ -1,5 +1,3 @@
-#module nuget:?package=Cake.DotNetTool.Module&version=0.4.0
-
 #tool dotnet:?package=GitVersion.Tool&version=5.1.3
 
 var target = Argument("target", "Default");
