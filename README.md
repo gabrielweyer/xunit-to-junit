@@ -73,6 +73,6 @@ If you want to pack the `.NET Core Global Tool` you can run: `dotnet cake build.
 [nuget-tool-badge]: https://img.shields.io/nuget/v/dotnet-xunit-to-junit.svg?label=NuGet
 [nuget-tool-command]: https://www.nuget.org/packages/dotnet-xunit-to-junit
 [app-veyor]: https://ci.appveyor.com/project/GabrielWeyer/xunit-to-junit
-[app-veyor-shield]: https://ci.appveyor.com/api/projects/status/github/gabrielweyer/xunit-to-junit?branch=master&svg=true
+[app-veyor-shield]: https://ci.appveyor.com/api/projects/status/github/gabrielweyer/xunit-to-junit?branch=main&svg=true
 [dotnet-global-tools]: https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools
 [dotnet-core-sdk]: https://dotnet.microsoft.com/download/dotnet/6.0
