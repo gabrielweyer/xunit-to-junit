@@ -61,6 +61,18 @@ deploy:
     prerelease: true
     on:
       branch: /features\/.+/
+  - provider: GitHub
+    # By convention release versions start with `v`
+    release: v$(APPVEYOR_BUILD_VERSION)
+    auth_token:
+      # Encrypted `GitHub` `PAT`
+      # https://www.appveyor.com/docs/deployment/github/#provider-settings
+      secure: 8c0kzvySSAQjxu1cm/6AHTrzdE7B7DL36n0BRotnBVXpB11d0ySP5+GXJz29Jnhu
+    artifact: transform,packages
+    draft: false
+    prerelease: true
+    on:
+      branch: /hotfix\/.+/
 # Environment variables
 environment:
   # No need to pre-warm the `NuGet` cache
