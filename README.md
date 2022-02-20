@@ -1,5 +1,7 @@
 # xUnit.net v2 XML Format to JUnit Format #
 
+:rotating_light: If you're using this tool to process test results file(s) after having run `dotnet test`, I recommend using the [JUnit Test Logger][junit-logger] instead. The output is better (at least in CircleCI). If you can't install an additional NuGet package in your test project(s), can't modify your build or are processing test results file(s) that have previously been generated, please read on.
+
 | Package | Release |
 | - | - |
 | `dotnet-xunit-to-junit` | [![NuGet][nuget-tool-badge]][nuget-tool-command] |
@@ -76,3 +78,4 @@ If you want to pack the `.NET Core Global Tool` you can run: `dotnet cake build.
 [app-veyor-shield]: https://ci.appveyor.com/api/projects/status/github/gabrielweyer/xunit-to-junit?branch=main&svg=true
 [dotnet-global-tools]: https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools
 [dotnet-core-sdk]: https://dotnet.microsoft.com/download/dotnet/6.0
+[junit-logger]: https://github.com/spekt/junit.testlogger
