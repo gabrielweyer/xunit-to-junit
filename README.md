@@ -8,7 +8,7 @@
 
 | CI | Status | Platform(s) | Framework(s) | Test Framework(s) |
 | --- | --- | --- | --- | --- |
-| [AppVeyor][app-veyor] | [![Build Status][app-veyor-shield]][app-veyor] | `Windows` | `netcoreapp3.1`, `net5.0`, `net6.0` | `net6.0` |
+| [GitHub][github-actions] | [![Build Status][github-actions-shield]][github-actions] | `Windows` | `netcoreapp3.1`, `net5.0`, `net6.0` | `netcoreapp3.1`,`net6.0` |
 
 [CircleCI][circle-ci] can only parse test results in the [JUnit format][junit-format]. This `Extensible Stylesheet Language Transformations` can transform a `xUnit.net v2 XML` test results file into a `JUnit` test results file.
 
@@ -18,7 +18,7 @@
 
 ### Consume `JUnit.xslt` through the `dotnet-xunit-to-junit` `NuGet` package ###
 
-`dotnet-xunit-to-junit` is a `.NET Core` [global tool][dotnet-global-tools]:
+`dotnet-xunit-to-junit` is a `.NET` [global tool][dotnet-global-tools]:
 
 ```powershell
 dotnet tool install -g dotnet-xunit-to-junit
@@ -54,7 +54,7 @@ using (var results = XmlWriter.Create(stream, writerSettings))
 
 ## Running locally ##
 
-Install the [.NET SDK 6.0.x][dotnet-core-sdk].
+Install the [.NET SDK 6.0.x][dotnet-sdk].
 
 Once you're done, run this command to initialise `Cake`:
 
@@ -68,14 +68,14 @@ You can then run the build script:
 dotnet cake build.cake
 ```
 
-If you want to pack the `.NET Core Global Tool` you can run: `dotnet cake build.cake --pack`
+If you want to pack the `.NET Global Tool` you can run: `dotnet cake build.cake --pack`
 
+[github-actions]: https://github.com/gabrielweyer/xunit-to-junit/actions/workflows/build.yml
+[github-actions-shield]: https://github.com/gabrielweyer/xunit-to-junit/actions/workflows/build.yml/badge.svg
 [circle-ci]: https://circleci.com/
 [junit-format]: http://llg.cubic.org/docs/junit/
 [nuget-tool-badge]: https://img.shields.io/nuget/v/dotnet-xunit-to-junit.svg?label=NuGet
 [nuget-tool-command]: https://www.nuget.org/packages/dotnet-xunit-to-junit
-[app-veyor]: https://ci.appveyor.com/project/GabrielWeyer/xunit-to-junit
-[app-veyor-shield]: https://ci.appveyor.com/api/projects/status/github/gabrielweyer/xunit-to-junit?branch=main&svg=true
 [dotnet-global-tools]: https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools
-[dotnet-core-sdk]: https://dotnet.microsoft.com/download/dotnet/6.0
+[dotnet-sdk]: https://dotnet.microsoft.com/download/dotnet/6.0
 [junit-logger]: https://github.com/spekt/junit.testlogger

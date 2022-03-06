@@ -1,4 +1,5 @@
-#tool dotnet:?package=GitVersion.Tool&version=5.8.1
+#tool dotnet:?package=GitVersion.Tool&version=5.8.2
+#addin nuget:?package=Cake.Incubator&version=7.0.0
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
@@ -9,8 +10,11 @@ var packageVersion = "1.0.0";
 var artifactsDir = MakeAbsolute(Directory("artifacts"));
 var testsResultsDir = artifactsDir.Combine(Directory("tests-results"));
 var packagesDir = artifactsDir.Combine(Directory("packages"));
+var testResultsDir = artifactsDir.Combine(Directory("test-results"));
 
 var solutionPath = "./xUnitToJUnit.sln";
+
+var testProjects = new List<TestProject>();
 
 Task("Clean")
     .Does(() =>
@@ -45,16 +49,18 @@ Task("SemVer")
         Information($"NuGetVersion: {packageVersion}");
     });
 
-Task("SetAppVeyorVersion")
+Task("SetGitHubVersion")
     .IsDependentOn("Semver")
-    .WithCriteria(() => AppVeyor.IsRunningOnAppVeyor)
+    .WithCriteria(() => GitHubActions.IsRunningOnGitHubActions)
     .Does(() =>
     {
-        AppVeyor.UpdateBuildVersion(packageVersion);
+        var gitHubEnvironmentFile = Environment.GetEnvironmentVariable("GITHUB_ENV");
+        var packageVersionEnvironmentVariable = $"PACKAGE_VERSION={packageVersion}";
+        System.IO.File.WriteAllText(gitHubEnvironmentFile, packageVersionEnvironmentVariable);
     });
 
 Task("Build")
-    .IsDependentOn("SetAppVeyorVersion")
+    .IsDependentOn("SetGitHubVersion")
     .Does(() =>
     {
         var settings = new DotNetCoreBuildSettings
@@ -72,21 +78,45 @@ Task("Build")
         DotNetCoreBuild(solutionPath, settings);
     });
 
-Task("Test")
+Task("ListTestProjectsAndFrameworkVersions")
     .IsDependentOn("Build")
-    .Does(() =>
+    .DoesForEach(GetFiles("./tests/*/*Tests.csproj"), (testProject) =>
     {
-        var settings = new DotNetCoreTestSettings
-        {
-            Configuration = configuration,
-            NoBuild = true
-        };
+        var parsedProject = ParseProject(testProject.FullPath, configuration: configuration);
 
-        GetFiles("./tests/*/*Tests.csproj")
-            .ToList()
-            .ForEach(f => DotNetCoreTest(f.FullPath, settings));
+        parsedProject.TargetFrameworkVersions.ToList().ForEach(frameworkVersion =>
+        {
+            var projectToTest = new TestProject
+            {
+                FullPath = testProject.FullPath,
+                AssemblyName = parsedProject.AssemblyName,
+                FrameworkVersion = frameworkVersion
+            };
+            testProjects.Add(projectToTest);
+        });
     });
 
+Task("Test")
+    .IsDependentOn("ListTestProjectsAndFrameworkVersions")
+    .DoesForEach(() => testProjects, (testProject) =>
+    {
+        var settings = new DotNetTestSettings
+        {
+            Configuration = configuration,
+            NoBuild = true,
+            Framework = testProject.FrameworkVersion
+        };
+
+        if (GitHubActions.IsRunningOnGitHubActions)
+        {
+            var trxTestResultsFile = testResultsDir
+                .Combine($"{testProject.AssemblyName}.{testProject.FrameworkVersion}.trx");
+            settings.Loggers.Add($"\"trx;LogFileName={trxTestResultsFile}\"");
+        }
+
+        DotNetTest(testProject.FullPath, settings);
+    })
+    .DeferOnError();
 
 Task("Pack")
     .IsDependentOn("Test")
@@ -109,25 +139,14 @@ Task("Pack")
             .ForEach(f => DotNetCorePack(f.FullPath, settings));
     });
 
-Task("PublishAppVeyorArtifacts")
-    .IsDependentOn("Pack")
-    .WithCriteria(() => AppVeyor.IsRunningOnAppVeyor)
-    .Does(() =>
-    {
-        CopyFiles($"src/*.xslt", MakeAbsolute(Directory("./")), false);
-
-        GetFiles($"./*.xslt")
-            .ToList()
-            .ForEach(f => AppVeyor.UploadArtifact(f, new AppVeyorUploadArtifactsSettings { DeploymentName = "transform" }));
-
-        CopyFiles($"{packagesDir}/*.nupkg", MakeAbsolute(Directory("./")), false);
-
-        GetFiles($"./*.nupkg")
-            .ToList()
-            .ForEach(f => AppVeyor.UploadArtifact(f, new AppVeyorUploadArtifactsSettings { DeploymentName = "packages" }));
-    });
-
 Task("Default")
-    .IsDependentOn("PublishAppVeyorArtifacts");
+    .IsDependentOn("Pack");
 
 RunTarget(target);
+
+class TestProject
+{
+    public string FullPath { get; set; }
+    public string AssemblyName { get; set; }
+    public string FrameworkVersion { get; set; }
+}

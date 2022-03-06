@@ -1,0 +1,66 @@
+name: Build
+on:
+  push:
+    branches:
+      - main
+      - 'features/**'
+    paths-ignore:
+      - .editorconfig
+      - LICENSE
+      - README.md
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install latest .NET SDK
+        run: ./build/dotnet-install.sh
+      - name: Restore .NET tools
+        run: dotnet tool restore
+      - name: Build
+        run: |
+          dotnet cake build.cake --bootstrap
+          dotnet cake build.cake --pack
+      - name: Upload NuGet packages
+        uses: actions/upload-artifact@v2
+        with:
+          name: packages
+          path: ./artifacts/packages
+      - name: Upload XSLT transform
+        uses: actions/upload-artifact@v2
+        with:
+          name: transform
+          path: ./src/JUnit.xslt
+      - name: Upload dotnet test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: tests-results
+          path: ./artifacts/test-results/*.trx
+        if: ${{ always() }}
+      - name: Report test results
+        uses: dorny/test-reporter@v1.5.0
+        continue-on-error: true
+        if: ${{ always() }}
+        with:
+          name: Test results
+          path: 'artifacts/test-results/*.trx'
+          reporter: dotnet-trx
+      - name: Create GitHub release on main branch
+        if: ${{ github.ref_name == 'main' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          touch empty-release-notes.txt
+          gh release create v${{ env.PACKAGE_VERSION }} --title v${{ env.PACKAGE_VERSION }} ./artifacts/packages/* --target ${{ github.sha }} --repo ${{ github.repository }} --notes-file empty-release-notes.txt
+      - name: Create GitHub prerelease on features branches
+        if: ${{ startsWith(github.ref_name, 'features/') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          touch empty-release-notes.txt
+          gh release create v${{ env.PACKAGE_VERSION }} --title v${{ env.PACKAGE_VERSION }} ./artifacts/packages/* --target ${{ github.sha }} --repo ${{ github.repository }} --notes-file empty-release-notes.txt --prerelease
+      - name: Push NuGet package on main branch
+        if: ${{ github.ref_name == 'main' }}
+        run: dotnet nuget push ./artifacts/packages/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}

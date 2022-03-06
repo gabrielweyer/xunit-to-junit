@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>netcoreapp3.1;net6.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
@@ -18,9 +18,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\xUnitToJUnit\xUnitToJUnit.csproj">
-      <Project>{108F0E90-5660-4F79-9F55-1ABA43F787F8}</Project>
-      <Name>xUnitToJUnit</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\..\src\xUnitToJUnit\xUnitToJUnit.csproj" />
   </ItemGroup>
 </Project>
