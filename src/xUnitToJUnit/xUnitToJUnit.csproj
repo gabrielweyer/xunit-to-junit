@@ -14,6 +14,7 @@
     <PackageTags>xUnit JUnit CircleCI</PackageTags>
     <PackageProjectUrl>https://github.com/gabrielweyer/xunit-to-junit</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>Copyright © xUnitToJUnit contributors</Copyright>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
