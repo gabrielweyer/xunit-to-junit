@@ -13,12 +13,14 @@
     <PackageDescription>Transforms a xUnit.net v2 XML test results file into a JUnit test results file.</PackageDescription>
     <PackageTags>xUnit JUnit CircleCI</PackageTags>
     <PackageProjectUrl>https://github.com/gabrielweyer/xunit-to-junit</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <Copyright>Copyright © xUnitToJUnit contributors</Copyright>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\"/>
     <Content Include="../JUnit.xslt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
