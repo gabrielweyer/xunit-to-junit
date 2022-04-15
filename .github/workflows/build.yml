@@ -18,6 +18,10 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    env:
+      CREATE_RELEASE: ${{ github.ref_name == 'main' && !contains(github.event.head_commit.message, '[skip-release]') }}
+      IS_FEATURE_PULL_REQUEST: ${{ github.event_name == 'pull_request' && startsWith(github.head_ref, 'features/') }}
+      CREATE_PRERELEASE: 'false'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -55,20 +59,28 @@ jobs:
           name: Test results
           path: 'artifacts/test-results/*.trx'
           reporter: dotnet-trx
+      - name: Determine if we're skipping release on feature Pull Request
+        if: ${{ env.IS_FEATURE_PULL_REQUEST == 'true' }}
+        run: |
+          headCommitMessage=$(git log ${{ github.event.pull_request.head.sha }} -n 1 --format=%B)
+          echo "HEAD commit message is: $headCommitMessage"
+          if [[ $headCommitMessage != *"[skip-release]"* ]]; then
+            echo "CREATE_PRERELEASE=true" >> $GITHUB_ENV
+          fi
       - name: Create GitHub release on main branch
-        if: ${{ github.ref_name == 'main' }}
+        if: ${{ env.CREATE_RELEASE == 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           touch empty-release-notes.txt
           gh release create v${{ env.PACKAGE_VERSION }} --title v${{ env.PACKAGE_VERSION }} ./artifacts/packages/* --target ${{ github.sha }} --repo ${{ github.repository }} --notes-file empty-release-notes.txt
-      - name: Create GitHub prerelease on features branches
-        if: ${{ startsWith(github.ref_name, 'features/') }}
+      - name: Create GitHub prerelease on feature Pull Request
+        if: ${{ env.CREATE_PRERELEASE == 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           touch empty-release-notes.txt
           gh release create v${{ env.PACKAGE_VERSION }} --title v${{ env.PACKAGE_VERSION }} ./artifacts/packages/* --target ${{ github.sha }} --repo ${{ github.repository }} --notes-file empty-release-notes.txt --prerelease
       - name: Push NuGet package on main branch
-        if: ${{ github.ref_name == 'main' }}
+        if: ${{ env.CREATE_RELEASE == 'true' }}
         run: dotnet nuget push ./artifacts/packages/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
