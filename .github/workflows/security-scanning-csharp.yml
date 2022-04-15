@@ -3,8 +3,6 @@ name: "C# Security scanning"
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
   schedule:
     - cron: '39 13 * * 5'
 
