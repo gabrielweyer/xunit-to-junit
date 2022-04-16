@@ -1,16 +1,16 @@
 # Rider
-
 .idea/
-.vs/
 *.DotSettings.user
 
-# Compilation detritus
+# Visual Studio
+.vs/
 
+# Compilation detritus
 obj/
 bin/
 
-# Cake
-
-tools/*
+# Build
 artifacts/
 
+# NUKE
+.nuke/temp/
