@@ -3,7 +3,6 @@ using System.Linq;
 using Nuke.Common;
 using Nuke.Common.CI;
 using Nuke.Common.Execution;
-using Nuke.Common.Git;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
@@ -30,7 +29,7 @@ class Build : NukeBuild
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
     [Parameter("Whether we create the NuGet package - Default is false")]
-    readonly bool Package = false;
+    readonly bool Package;
 
     [Solution] readonly Solution Solution;
     [GitVersion] readonly GitVersion GitVersion;
@@ -41,7 +40,6 @@ class Build : NukeBuild
     static AbsolutePath TestResultsDirectory => ArtifactsDirectory / "test-results";
     static AbsolutePath CodeCoverageDirectory => ArtifactsDirectory / "coverage-report";
     static AbsolutePath PackagesDirectory => ArtifactsDirectory / "packages";
-
 
 #pragma warning disable CA1822 // Can't make this static as it breaks NUKE
     Target Clean => _ => _
@@ -88,8 +86,15 @@ class Build : NukeBuild
                 .EnableNoIncremental());
         });
 
-    Target Test => _ => _
+    Target VerifyFormat => _ => _
         .DependsOn(Compile)
+        .Executes(() =>
+        {
+            DotNet("format --verify-no-changes");
+        });
+
+    Target Test => _ => _
+        .DependsOn(VerifyFormat)
         .Executes(() =>
         {
             var testProjects =
