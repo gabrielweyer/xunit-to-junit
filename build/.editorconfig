@@ -9,3 +9,6 @@ csharp_style_expression_bodied_methods = true:silent
 csharp_style_expression_bodied_properties = true:warning
 csharp_style_expression_bodied_indexers = true:warning
 csharp_style_expression_bodied_accessors = true:warning
+
+# Ignore private instance fields naming rule
+dotnet_naming_rule.private_instance_fields_should_be_camel_case.severity = none

@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using System.Xml;
 using System.Xml.Xsl;
 
@@ -9,16 +9,16 @@ namespace xUnitToJUnit;
 /// </summary>
 public static class JUnitTransformer
 {
-    private static readonly XmlWriterSettings WriterSettings;
-    private static readonly XslCompiledTransform XlsTransform;
+    private static readonly XmlWriterSettings _writerSettings;
+    private static readonly XslCompiledTransform _xlsTransform;
 
     static JUnitTransformer()
     {
-        XlsTransform = new XslCompiledTransform();
-        XlsTransform.Load($"{AppContext.BaseDirectory}/JUnit.xslt");
+        _xlsTransform = new XslCompiledTransform();
+        _xlsTransform.Load($"{AppContext.BaseDirectory}/JUnit.xslt");
 
-        WriterSettings = XlsTransform.OutputSettings.Clone();
-        WriterSettings.Encoding = new UTF8Encoding(false);
+        _writerSettings = _xlsTransform.OutputSettings.Clone();
+        _writerSettings.Encoding = new UTF8Encoding(false);
     }
 
     /// <summary>
@@ -50,9 +50,9 @@ public static class JUnitTransformer
     /// <param name="stream">The output Stream.</param>
     public static void Transform(string xUnitTestResultsFilePath, Stream stream)
     {
-        using (var results = XmlWriter.Create(stream, WriterSettings))
+        using (var results = XmlWriter.Create(stream, _writerSettings))
         {
-            XlsTransform.Transform(xUnitTestResultsFilePath, results);
+            _xlsTransform.Transform(xUnitTestResultsFilePath, results);
         }
     }
 }
