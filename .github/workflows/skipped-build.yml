@@ -5,6 +5,8 @@ on:
       - main
     paths:
       - .github/workflows/skipped-build.yml
+      - .github/workflows/security-scanning-csharp.yml
+      - .github/dependabot.yml
       - .editorconfig
       - LICENSE
       - README.md

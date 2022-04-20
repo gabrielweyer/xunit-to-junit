@@ -2,7 +2,15 @@ name: "C# Security scanning"
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+    paths-ignore:
+      - .github/workflows/build.yml
+      - .github/workflows/skipped-build.yml
+      - .github/CODEOWNERS
+      - .github/dependabot.yml
+      - LICENSE
+      - README.md
   schedule:
     - cron: '39 13 * * 5'
 
