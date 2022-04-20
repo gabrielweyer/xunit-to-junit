@@ -23,6 +23,9 @@
     <NoWarn>CS7035</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <InternalsVisibleTo Include="Gabo.DotNet.xUnitToJUnit.Tests" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="\"/>
     <Content Include="../JUnit.xslt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
