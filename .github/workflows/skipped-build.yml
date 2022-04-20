@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - '!.github/workflows/build.yml'
+      - .github/workflows/skipped-build.yml
       - .editorconfig
       - LICENSE
       - README.md
