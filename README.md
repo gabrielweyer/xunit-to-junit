@@ -8,7 +8,7 @@
 
 | CI | Status | Platform(s) | Framework(s) | Test Framework(s) |
 | --- | --- | --- | --- | --- |
-| [GitHub][github-actions] | [![Build Status][github-actions-shield]][github-actions] | `Windows` | `netcoreapp3.1`, `net5.0`, `net6.0` | `netcoreapp3.1`,`net6.0` |
+| [GitHub][github-actions] | [![Build Status][github-actions-shield]][github-actions] | `Windows` | `netcoreapp3.1`, `net5.0`, `net6.0` | `netcoreapp3.1`, `net5.0`, `net6.0` |
 
 [CircleCI][circle-ci] can only parse test results in the [JUnit format][junit-format]. This `Extensible Stylesheet Language Transformations` can transform a `xUnit.net v2 XML` test results file into a `JUnit` test results file.
 

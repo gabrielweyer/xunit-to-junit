@@ -2,7 +2,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Xsl;
 
-namespace xUnitToJUnit;
+namespace Gabo.DotNet.xUnitToJUnit;
 
 /// <summary>
 /// Transforms a `xUnit.net v2 XML` test results file into a `JUnit` test results file.
