@@ -1,4 +1,4 @@
-namespace xUnitToJUnit;
+namespace Gabo.DotNet.xUnitToJUnit;
 
 internal class Program
 {

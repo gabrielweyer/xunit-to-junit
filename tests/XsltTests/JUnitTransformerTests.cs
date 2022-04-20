@@ -1,8 +1,7 @@
 using System.Text;
 using Xunit;
-using xUnitToJUnit;
 
-namespace XsltTests;
+namespace Gabo.DotNet.xUnitToJUnit.Tests;
 
 public class JUnitTransformerTests : IDisposable
 {
