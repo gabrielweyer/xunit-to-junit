@@ -8,7 +8,7 @@
 
 | CI | Status | Platform(s) | Framework(s) | Test Framework(s) |
 | --- | --- | --- | --- | --- |
-| [GitHub][github-actions] | [![Build Status][github-actions-shield]][github-actions] | `Windows` | `netcoreapp3.1`, `net5.0`, `net6.0` | `netcoreapp3.1`, `net5.0`, `net6.0` |
+| [GitHub][github-actions] | [![Build Status][github-actions-shield]][github-actions] | `Ubuntu` | `netcoreapp3.1`, `net5.0`, `net6.0` | `netcoreapp3.1`, `net5.0`, `net6.0` |
 
 [CircleCI][circle-ci] can only parse test results in the [JUnit format][junit-format]. This `Extensible Stylesheet Language Transformations` can transform a `xUnit.net v2 XML` test results file into a `JUnit` test results file.
 
@@ -52,23 +52,21 @@ using (var results = XmlWriter.Create(stream, writerSettings))
 }
 ```
 
-## Running locally ##
+## Building locally ##
 
-Install the [.NET SDK 6.0.x][dotnet-sdk].
-
-Once you're done, run this command to initialise `Cake`:
+Run this command to build on Windows:
 
 ```powershell
-.\bootstrap.ps1
+.\build.ps1
 ```
 
-You can then run the build script:
+Run this command to build on Linux / macOS:
 
-```powershell
-dotnet cake build.cake
+```shell
+./build.sh
 ```
 
-If you want to pack the `.NET Global Tool` you can run: `dotnet cake build.cake --pack`
+If you want to pack the `.NET Global Tool`, you can run `.\build.ps1 --package`.
 
 [github-actions]: https://github.com/gabrielweyer/xunit-to-junit/actions/workflows/build.yml
 [github-actions-shield]: https://github.com/gabrielweyer/xunit-to-junit/actions/workflows/build.yml/badge.svg
@@ -77,5 +75,4 @@ If you want to pack the `.NET Global Tool` you can run: `dotnet cake build.cake 
 [nuget-tool-badge]: https://img.shields.io/nuget/v/dotnet-xunit-to-junit.svg?label=NuGet
 [nuget-tool-command]: https://www.nuget.org/packages/dotnet-xunit-to-junit
 [dotnet-global-tools]: https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools
-[dotnet-sdk]: https://dotnet.microsoft.com/download/dotnet/6.0
 [junit-logger]: https://github.com/spekt/junit.testlogger
