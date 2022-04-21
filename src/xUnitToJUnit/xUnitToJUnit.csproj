@@ -5,6 +5,7 @@
     <RootNamespace>Gabo.DotNet.xUnitToJUnit</RootNamespace>
     <AssemblyName>dotnet-xunit-to-junit</AssemblyName>
     <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'True'">true</ContinuousIntegrationBuild>
