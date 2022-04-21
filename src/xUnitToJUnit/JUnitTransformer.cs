@@ -15,7 +15,13 @@ public static class JUnitTransformer
     static JUnitTransformer()
     {
         _xlsTransform = new XslCompiledTransform();
-        _xlsTransform.Load($"{AppContext.BaseDirectory}/JUnit.xslt");
+        var xsltPath = $"{AppContext.BaseDirectory}/JUnit.xslt";
+        _xlsTransform.Load(xsltPath);
+
+        if (_xlsTransform.OutputSettings == null)
+        {
+            throw new InvalidOperationException($"The XSLT does not contain a xsl:output element ('{xsltPath}').");
+        }
 
         _writerSettings = _xlsTransform.OutputSettings.Clone();
         _writerSettings.Encoding = new UTF8Encoding(false);
