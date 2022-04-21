@@ -5,6 +5,7 @@
     <AssemblyName>Gabo.DotNet.xUnitToJUnit.Tests</AssemblyName>
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <NoWarn>CS7035</NoWarn>
   </PropertyGroup>
