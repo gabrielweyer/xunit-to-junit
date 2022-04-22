@@ -2,13 +2,13 @@
 
 :rotating_light: If you're using this tool to process test results file(s) after having run `dotnet test`, I recommend using the [JUnit Test Logger][junit-logger] instead. The output is better (at least in CircleCI). If you can't install an additional NuGet package in your test project(s), can't modify your build or are processing test results file(s) that have previously been generated, please read on.
 
-| Package | Release |
-| - | - |
+| Package                 | Release                                          |
+| ----------------------- | ------------------------------------------------ |
 | `dotnet-xunit-to-junit` | [![NuGet][nuget-tool-badge]][nuget-tool-command] |
 
-| CI | Status | Platform(s) | Framework(s) | Test Framework(s) |
-| --- | --- | --- | --- | --- |
-| [GitHub][github-actions] | [![Build Status][github-actions-shield]][github-actions] | `Ubuntu` | `netcoreapp3.1`, `net5.0`, `net6.0` | `netcoreapp3.1`, `net5.0`, `net6.0` |
+| CI                       | Status                                                   | Platform(s) | Framework(s)                        | Test Framework(s)                   |
+| ------------------------ | -------------------------------------------------------- | ----------- | ----------------------------------- | ----------------------------------- |
+| [GitHub][github-actions] | [![Build Status][github-actions-shield]][github-actions] | `Ubuntu`    | `netcoreapp3.1`, `net5.0`, `net6.0` | `netcoreapp3.1`, `net5.0`, `net6.0` |
 
 [CircleCI][circle-ci] can only parse test results in the [JUnit format][junit-format]. This `Extensible Stylesheet Language Transformations` can transform a `xUnit.net v2 XML` test results file into a `JUnit` test results file.
 
