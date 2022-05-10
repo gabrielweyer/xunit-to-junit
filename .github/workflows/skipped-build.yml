@@ -4,9 +4,10 @@ on:
     branches:
       - main
     paths:
-      - .github/workflows/skipped-build.yml
       - .github/workflows/security-scanning-csharp.yml
+      - .github/workflows/skipped-build.yml
       - .github/dependabot.yml
+      - '.vscode/**'
       - .editorconfig
       - LICENSE
       - README.md
