@@ -3,7 +3,7 @@ namespace Gabo.DotNet.xUnitToJUnit.Tests;
 public class ProgramTests : IDisposable
 {
     private const string ExistingInputFilePath = "input/passed-test.xml";
-    private const string OutputDirectory = "output";
+    private const string OutputDirectory = "output-program";
 
     [Fact]
     public void GivenNoArgumentProvided_ThenFailureExitCode()
