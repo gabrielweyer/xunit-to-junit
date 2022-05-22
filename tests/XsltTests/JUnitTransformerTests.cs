@@ -5,7 +5,7 @@ namespace Gabo.DotNet.xUnitToJUnit.Tests;
 public class JUnitTransformerTests : IDisposable
 {
     private const string ExistingInputFilePath = "input/passed-test.xml";
-    private const string OutputDirectory = "output";
+    private const string OutputDirectory = "output-transformer";
 
     [Fact]
     public void GivenOnlyFileNameForOutputPath_WhenTransform_ThenCreateFile()
