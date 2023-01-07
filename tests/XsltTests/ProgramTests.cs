@@ -1,6 +1,6 @@
 namespace Gabo.DotNet.xUnitToJUnit.Tests;
 
-public class ProgramTests : IDisposable
+public sealed class ProgramTests : IDisposable
 {
     private const string ExistingInputFilePath = "input/passed-test.xml";
     private const string OutputDirectory = "output-program";

@@ -7,12 +7,12 @@ namespace Gabo.DotNet.xUnitToJUnit;
 /// <summary>
 /// Transforms a `xUnit.net v2 XML` test results file into a `JUnit` test results file.
 /// </summary>
-public static class JUnitTransformer
+public class JUnitTransformer
 {
-    private static readonly XmlWriterSettings _writerSettings;
-    private static readonly XslCompiledTransform _xlsTransform;
+    private readonly XmlWriterSettings _writerSettings;
+    private readonly XslCompiledTransform _xlsTransform;
 
-    static JUnitTransformer()
+    public JUnitTransformer()
     {
         _xlsTransform = new XslCompiledTransform();
         var xsltPath = $"{AppContext.BaseDirectory}/JUnit.xslt";
@@ -33,7 +33,7 @@ public static class JUnitTransformer
     /// <param name="xUnitTestResultsFilePath">The `xUnit.net v2 XML` test results file path.</param>
     /// <param name="jUnitTestResultsFilePath">The `JUnit` test results file path, if the containing
     /// directory does not exist it will be created.</param>
-    public static void Transform(string xUnitTestResultsFilePath, string jUnitTestResultsFilePath)
+    public void Transform(string xUnitTestResultsFilePath, string jUnitTestResultsFilePath)
     {
         var jUnitTestResultsDirectory = Path.GetDirectoryName(jUnitTestResultsFilePath);
 
@@ -54,7 +54,7 @@ public static class JUnitTransformer
     /// </summary>
     /// <param name="xUnitTestResultsFilePath">The `xUnit.net v2 XML` test results file path.</param>
     /// <param name="stream">The output Stream.</param>
-    public static void Transform(string xUnitTestResultsFilePath, Stream stream)
+    public void Transform(string xUnitTestResultsFilePath, Stream stream)
     {
         using (var results = XmlWriter.Create(stream, _writerSettings))
         {
