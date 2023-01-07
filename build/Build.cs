@@ -13,7 +13,7 @@ using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 [ShutdownDotNetAfterServerBuild]
-class Build : NukeBuild
+sealed class Build : NukeBuild
 {
     /// Support plugins are available for:
     ///   - JetBrains ReSharper        https://nuke.build/resharper
@@ -97,7 +97,7 @@ class Build : NukeBuild
         {
             var testProjects =
                 from testProject in Solution.AllProjects
-                where testProject.Name.EndsWith("Tests")
+                where testProject.Name.EndsWith("Tests", StringComparison.Ordinal)
                 from framework in testProject.GetTargetFrameworks()
                 select new { TestProject = testProject, Framework = framework };
 
