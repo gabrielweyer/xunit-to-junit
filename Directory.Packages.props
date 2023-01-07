@@ -25,5 +25,6 @@
     <GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.3" />
     <GlobalPackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.4.27" />
     <GlobalPackageReference Include="AsyncFixer" Version="1.6.0" />
+    <PackageVersion Include="xunit.analyzers" Version="1.1.0" />
   </ItemGroup>
 </Project>
