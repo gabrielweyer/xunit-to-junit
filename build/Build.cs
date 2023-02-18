@@ -137,6 +137,7 @@ sealed class Build : NukeBuild
         .Executes(() =>
         {
             DotNetPack(s => s
+                .SetProject(SourceDirectory / "xUnitToJUnit")
                 .SetConfiguration(Configuration)
                 .EnableNoBuild()
                 .EnableIncludeSymbols()
