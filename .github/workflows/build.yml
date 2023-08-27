@@ -69,14 +69,6 @@ jobs:
         with:
           name: coverage
           path: ./artifacts/coverage-report
-      - name: Report test results
-        uses: dorny/test-reporter@v1.6.0
-        continue-on-error: true
-        if: ${{ always() }}
-        with:
-          name: Test results
-          path: 'artifacts/test-results/**/*.trx'
-          reporter: dotnet-trx
       - name: Determine if we're skipping release on feature Pull Request
         if: ${{ env.IS_FEATURE_PULL_REQUEST == 'true' }}
         run: |
