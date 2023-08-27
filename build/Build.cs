@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Nuke.Common;
 using Nuke.Common.CI;
@@ -111,11 +112,22 @@ sealed class Build : NukeBuild
                     var testResultsName = $"{p.TestProject.Path.NameWithoutExtension}-{p.Framework}";
                     var testResultsDirectory = TestResultsDirectory / testResultsName;
 
+                    var loggers = new List<string>
+                    {
+                        $"trx;LogFileName={testResultsName}.trx",
+                        $"html;LogFileName={testResultsName}.html"
+                    };
+
+                    if (IsServerBuild)
+                    {
+                        loggers.Add($"GitHubActions;annotations.titleFormat=$test ({p.Framework})");
+                    }
+
                     return ss
                         .SetProjectFile(p.TestProject)
                         .SetFramework(p.Framework)
                         .SetResultsDirectory(testResultsDirectory)
-                        .SetLoggers($"trx;LogFileName={testResultsName}.trx", $"html;LogFileName={testResultsName}.html");
+                        .SetLoggers(loggers);
                 }), completeOnFailure: true);
         });
 
