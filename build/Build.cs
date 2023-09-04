@@ -1,8 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Nuke.Common;
 using Nuke.Common.CI;
-using Nuke.Common.Execution;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
@@ -10,12 +10,12 @@ using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.GitVersion;
 using Nuke.Common.Tools.ReportGenerator;
 using Nuke.Common.Utilities.Collections;
-using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
-[CheckBuildProjectConfigurations]
+namespace Gabo;
+
 [ShutdownDotNetAfterServerBuild]
-class Build : NukeBuild
+sealed class Build : NukeBuild
 {
     /// Support plugins are available for:
     ///   - JetBrains ReSharper        https://nuke.build/resharper
@@ -46,9 +46,9 @@ class Build : NukeBuild
 #pragma warning restore CA1822
         .Executes(() =>
         {
-            SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
-            TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
-            EnsureCleanDirectory(ArtifactsDirectory);
+            SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(p => p.DeleteDirectory());
+            TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(p => p.DeleteDirectory());
+            ArtifactsDirectory.CreateOrCleanDirectory();
         });
 
     Target Restore => _ => _
@@ -90,7 +90,7 @@ class Build : NukeBuild
         .DependsOn(Compile)
         .Executes(() =>
         {
-            DotNet("format --verify-no-changes");
+            DotNet($"format --verify-no-changes");
         });
 
     Target Test => _ => _
@@ -99,7 +99,7 @@ class Build : NukeBuild
         {
             var testProjects =
                 from testProject in Solution.AllProjects
-                where testProject.Name.EndsWith("Tests")
+                where testProject.Name.EndsWith("Tests", StringComparison.Ordinal)
                 from framework in testProject.GetTargetFrameworks()
                 select new { TestProject = testProject, Framework = framework };
 
@@ -112,11 +112,22 @@ class Build : NukeBuild
                     var testResultsName = $"{p.TestProject.Path.NameWithoutExtension}-{p.Framework}";
                     var testResultsDirectory = TestResultsDirectory / testResultsName;
 
+                    var loggers = new List<string>
+                    {
+                        $"trx;LogFileName={testResultsName}.trx",
+                        $"html;LogFileName={testResultsName}.html"
+                    };
+
+                    if (IsServerBuild)
+                    {
+                        loggers.Add($"GitHubActions;annotations.titleFormat=$test ({p.Framework})");
+                    }
+
                     return ss
                         .SetProjectFile(p.TestProject)
                         .SetFramework(p.Framework)
                         .SetResultsDirectory(testResultsDirectory)
-                        .SetLoggers($"trx;LogFileName={testResultsName}.trx", $"html;LogFileName={testResultsName}.html");
+                        .SetLoggers(loggers);
                 }), completeOnFailure: true);
         });
 
@@ -137,6 +148,7 @@ class Build : NukeBuild
         .Executes(() =>
         {
             DotNetPack(s => s
+                .SetProject(SourceDirectory / "xUnitToJUnit")
                 .SetConfiguration(Configuration)
                 .EnableNoBuild()
                 .EnableIncludeSymbols()

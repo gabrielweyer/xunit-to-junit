@@ -2,16 +2,22 @@ using System.Text;
 
 namespace Gabo.DotNet.xUnitToJUnit.Tests;
 
-public class JUnitTransformerTests : IDisposable
+public sealed class JUnitTransformerTests : IDisposable
 {
+    private readonly JUnitTransformer _target;
     private const string ExistingInputFilePath = "input/passed-test.xml";
     private const string OutputDirectory = "output-transformer";
+
+    public JUnitTransformerTests()
+    {
+        _target = new JUnitTransformer();
+    }
 
     [Fact]
     public void GivenOnlyFileNameForOutputPath_WhenTransform_ThenCreateFile()
     {
         // Act
-        JUnitTransformer.Transform(ExistingInputFilePath, "junit.xml");
+        _target.Transform(ExistingInputFilePath, "junit.xml");
 
         // Assert
         Assert.True(File.Exists("junit.xml"));
@@ -25,7 +31,7 @@ public class JUnitTransformerTests : IDisposable
         Assert.False(Directory.Exists(OutputDirectory));
 
         // Act
-        JUnitTransformer.Transform(ExistingInputFilePath, outputFilePath);
+        _target.Transform(ExistingInputFilePath, outputFilePath);
 
         // Assert
         Assert.True(File.Exists(outputFilePath));
@@ -114,10 +120,10 @@ public class JUnitTransformerTests : IDisposable
         Assert.Equal(expected, actual);
     }
 
-    private static string Transform(string inputFileName)
+    private string Transform(string inputFileName)
     {
         using var stream = new MemoryStream();
-        JUnitTransformer.Transform($"./input/{inputFileName}.xml", stream);
+        _target.Transform($"./input/{inputFileName}.xml", stream);
         return Encoding.UTF8.GetString(stream.ToArray());
     }
 

@@ -18,7 +18,8 @@ internal static class Program
         var xUnitTestResultsFilePath = args[0];
         var jUnitTestResultsFilePath = args[1];
 
-        JUnitTransformer.Transform(xUnitTestResultsFilePath, jUnitTestResultsFilePath);
+        var junitTransformer = new JUnitTransformer();
+        junitTransformer.Transform(xUnitTestResultsFilePath, jUnitTestResultsFilePath);
 
         Console.WriteLine(
             $"The xUnit test results file \"{xUnitTestResultsFilePath}\" has been converted to the JUnit test results file \"{jUnitTestResultsFilePath}\"");
