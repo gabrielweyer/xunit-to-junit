@@ -12,7 +12,7 @@
     <PackageVersion Include="FluentAssertions" Version="6.12.0" />
     <PackageVersion Include="GitHubActionsTestLogger" Version="2.3.3" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.7.2" />
-    <PackageVersion Include="xunit" Version="2.5.3" />
+    <PackageVersion Include="xunit" Version="2.6.1" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.3" Condition="'$(TargetFramework)' == 'netcoreapp3.1'" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.3" Condition="'$(TargetFramework)' != 'netcoreapp3.1'" />
     <GlobalPackageReference Include="AsyncFixer" Version="1.6.0" />
