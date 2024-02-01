@@ -32,10 +32,10 @@ jobs:
       CREATE_PRERELEASE: 'false'
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-dotnet@v3
+      - uses: actions/setup-dotnet@v4
         name: Install .NET 8
         with:
           dotnet-version: '8.0.x'
@@ -43,26 +43,26 @@ jobs:
       - name: Build
         run: ./build.sh --package
       - name: Upload NuGet packages
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: packages
           path: ./artifacts/packages
           if-no-files-found: error
       - name: Upload XSLT transform
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: transform
           path: ./src/JUnit.xslt
           if-no-files-found: error
       - name: Upload dotnet test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: tests-results
           path: ./artifacts/test-results/**/*.html
           if-no-files-found: error
         if: ${{ always() }}
       - name: Upload coverage report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage
           path: ./artifacts/coverage-report
