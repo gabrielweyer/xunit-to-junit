@@ -144,7 +144,7 @@ sealed class Build : NukeBuild
 
     Target Pack => _ => _
         .DependsOn(Coverage)
-        .OnlyWhenStatic(() => Package)
+        .OnlyWhenDynamic(() => Package)
         .Executes(() =>
         {
             DotNetPack(s => s
