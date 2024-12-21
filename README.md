@@ -6,9 +6,9 @@
 | ----------------------- | ------------------------------------------------ |
 | `dotnet-xunit-to-junit` | [![NuGet][nuget-tool-badge]][nuget-tool-command] |
 
-| CI                       | Status                                                   | Platform(s) | Framework(s)                 | Test Framework(s)            |
-| ------------------------ | -------------------------------------------------------- | ----------- | ---------------------------- | ---------------------------- |
-| [GitHub][github-actions] | [![Build Status][github-actions-shield]][github-actions] | `Ubuntu`    | `net6.0`, `net7.0`, `net8.0` | `net6.0`, `net7.0`, `net8.0` |
+| CI                       | Status                                                   | Platform(s) | Framework(s) | Test Framework(s) |
+| ------------------------ | -------------------------------------------------------- | ----------- | ------------ | ----------------- |
+| [GitHub][github-actions] | [![Build Status][github-actions-shield]][github-actions] | `Ubuntu`    | `net8.0`     | `net8.0`          |
 
 [CircleCI][circle-ci] can only parse test results in the [JUnit format][junit-format]. This `Extensible Stylesheet Language Transformations` can transform a `xUnit.net v2 XML` test results file into a `JUnit` test results file.
 
@@ -26,8 +26,6 @@ dotnet xunit-to-junit "path-to-xunit-test-results.xml" "desired-path-to-junit-te
 ```
 
 ### Consume `JUnit.xslt` directly from C# ###
-
-**Note**: For `.NET Core`, this requires `nestandard2.0` and above.
 
 ```csharp
 // Required using statement
