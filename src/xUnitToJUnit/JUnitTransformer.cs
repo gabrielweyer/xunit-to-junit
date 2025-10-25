@@ -7,7 +7,7 @@ namespace Gabo.DotNet.xUnitToJUnit;
 /// <summary>
 /// Transforms a `xUnit.net v2 XML` test results file into a `JUnit` test results file.
 /// </summary>
-public class JUnitTransformer
+internal class JUnitTransformer
 {
     private readonly XmlWriterSettings _writerSettings;
     private readonly XslCompiledTransform _xlsTransform;
