@@ -7,7 +7,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
-    <NoWarn>CS7035;CA1707</NoWarn>
+    <NoWarn>CS7035;CA1707;CA1515</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Using Include="FluentAssertions" />
