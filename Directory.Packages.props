@@ -15,7 +15,7 @@
     <PackageVersion Include="xunit.analyzers" Version="1.26.0" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
     <GlobalPackageReference Include="AsyncFixer" Version="2.1.0" />
-    <GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.275" />
+    <GlobalPackageReference Include="Meziantou.Analyzer" Version="2.0.279" />
     <GlobalPackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.14.15" />
   </ItemGroup>
 </Project>
