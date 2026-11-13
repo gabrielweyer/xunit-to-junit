@@ -22,6 +22,9 @@ Add `--package` to also create the NuGet package in `artifacts/packages`.
 
 - The version is computed by [GitVersion][gitversion] (configured in `GitVersion.yml`), from the most recent version tag reachable from `HEAD`.
 - Every push to `main` builds and **releases**: the workflow creates a GitHub release named `v<version>` and pushes the package to NuGet.
+- The package is pushed to NuGet with [Trusted Publishing][trusted-publishing]: the `NuGet/login` action exchanges a GitHub OIDC token for an API key valid for one hour. This requires:
+  - A Trusted Publishing policy on nuget.org for this repository and the workflow file `build.yml`. Renaming the workflow file breaks publishing until the policy is updated.
+  - A `NUGET_USER` repository secret containing the nuget.org username (profile name, not the email address) that owns the policy.
 - Without a tag on `HEAD`, the version is the latest tag with its patch number incremented (e.g. `v8.0.0` → `8.0.1`).
 - No release is created when the `HEAD` commit message contains `[skip-release]` or `dependabot[bot]`.
 - Changes that only touch `README.md`, `DEVELOPING.md`, `LICENSE`, `.editorconfig`, `.vscode/`, `.github/dependabot.yml` or the other workflows don't run the build at all, so they don't release.
@@ -78,3 +81,4 @@ Pushing a tag alone doesn't trigger a build, so a wrong tag pushed on its own is
 A Pull Request from a `features/<name>` branch publishes a GitHub prerelease (not pushed to NuGet), unless the `HEAD` commit message contains `[skip-release]`.
 
 [gitversion]: https://gitversion.net/docs/
+[trusted-publishing]: https://learn.microsoft.com/en-us/nuget/nuget-org/trusted-publishing
