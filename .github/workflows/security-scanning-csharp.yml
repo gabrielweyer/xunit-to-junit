@@ -13,6 +13,7 @@ on:
       - .editorconfig
       - LICENSE
       - README.md
+      - DEVELOPING.md
   schedule:
     - cron: '39 13 * * 5'
 
