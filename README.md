@@ -50,21 +50,9 @@ using (var results = XmlWriter.Create(stream, writerSettings))
 }
 ```
 
-## Building locally ##
+## Developing ##
 
-Run this command to build on Windows:
-
-```powershell
-.\build.ps1
-```
-
-Run this command to build on Linux / macOS:
-
-```shell
-./build.sh
-```
-
-If you want to pack the `.NET Global Tool`, you can run `.\build.ps1 --package`.
+See [DEVELOPING.md](DEVELOPING.md) for how to build locally and how to release a new version.
 
 [github-actions]: https://github.com/gabrielweyer/xunit-to-junit/actions/workflows/build.yml
 [github-actions-shield]: https://github.com/gabrielweyer/xunit-to-junit/actions/workflows/build.yml/badge.svg

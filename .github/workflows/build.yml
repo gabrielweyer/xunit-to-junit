@@ -11,6 +11,7 @@ on:
       - .editorconfig
       - LICENSE
       - README.md
+      - DEVELOPING.md
   pull_request:
     branches:
       - main
@@ -22,6 +23,7 @@ on:
       - .editorconfig
       - LICENSE
       - README.md
+      - DEVELOPING.md
 jobs:
   build:
     name: Build

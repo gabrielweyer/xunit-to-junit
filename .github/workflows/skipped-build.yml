@@ -11,6 +11,7 @@ on:
       - .editorconfig
       - LICENSE
       - README.md
+      - DEVELOPING.md
 jobs:
   build:
     name: Build
