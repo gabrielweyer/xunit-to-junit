@@ -8,7 +8,7 @@
 
 | CI                       | Status                                                   | Platform(s) | Framework(s) | Test Framework(s) |
 | ------------------------ | -------------------------------------------------------- | ----------- | ------------ | ----------------- |
-| [GitHub][github-actions] | [![Build Status][github-actions-shield]][github-actions] | `Ubuntu`    | `net8.0`     | `net8.0`          |
+| [GitHub][github-actions] | [![Build Status][github-actions-shield]][github-actions] | `Ubuntu`    | `net10.0`    | `net10.0`         |
 
 [CircleCI][circle-ci] can only parse test results in the [JUnit format][junit-format]. This `Extensible Stylesheet Language Transformations` can transform a `xUnit.net v2 XML` test results file into a `JUnit` test results file.
 

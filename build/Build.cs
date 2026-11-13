@@ -136,7 +136,7 @@ sealed class Build : NukeBuild
         .Executes(() =>
         {
             ReportGeneratorTasks.ReportGenerator(s => s
-                .SetFramework("net8.0")
+                .SetFramework("net10.0")
                 .SetReports($"{TestResultsDirectory}/**/coverage.cobertura.xml")
                 .SetTargetDirectory(CodeCoverageDirectory)
                 .SetReportTypes(ReportTypes.Html));

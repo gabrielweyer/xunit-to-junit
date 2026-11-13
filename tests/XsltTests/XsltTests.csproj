@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0</TargetFrameworks>
+    <TargetFrameworks>net10.0</TargetFrameworks>
     <RootNamespace>Gabo.DotNet.xUnitToJUnit.Tests</RootNamespace>
     <AssemblyName>Gabo.DotNet.xUnitToJUnit.Tests</AssemblyName>
     <LangVersion>latest</LangVersion>
